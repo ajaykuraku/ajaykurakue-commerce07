@@ -526,6 +526,32 @@ healthy products and secure online shopping experience.
 </div>
 
 </div>
+<!-- DELIVERY ADDRESS MODAL -->
+
+<div class="modal" id="addressModal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeAddress()">&times;</span>
+
+<h2>Delivery Address</h2>
+
+<input type="text" id="customerName" placeholder="Full Name">
+
+<input type="text" id="customerPhone" placeholder="Phone Number">
+
+<textarea id="customerAddress" placeholder="Full Address"
+style="width:100%;height:100px;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:8px;"></textarea>
+
+<input type="text" id="customerLandmark" placeholder="Landmark">
+
+<input type="text" id="customerPincode" placeholder="Pincode">
+
+<button onclick="openPayment()">Continue to Payment</button>
+
+</div>
+
+</div>
 
 <!-- PAYMENT MODAL -->
 
@@ -801,13 +827,11 @@ function register(){
 function checkout(){
 
     if(total === 0){
-
         alert("Your cart is empty!");
-
-    }else{
-
-        document.getElementById("paymentModal").style.display="block";
+        return;
     }
+
+    document.getElementById("addressModal").style.display = "block";
 }
 
 /* CLOSE PAYMENT */
@@ -845,7 +869,27 @@ function payNow(){
 
     window.location.href = upiURL;
 }
+function closeAddress(){
+    document.getElementById("addressModal").style.display = "none";
+}
 
+function openPayment(){
+
+    let name = document.getElementById("customerName").value;
+    let phone = document.getElementById("customerPhone").value;
+    let address = document.getElementById("customerAddress").value;
+    let landmark = document.getElementById("customerLandmark").value;
+    let pincode = document.getElementById("customerPincode").value;
+
+    if(name === "" || phone === "" || address === "" || landmark === "" || pincode === ""){
+        alert("Please fill all delivery details");
+        return;
+    }
+
+    closeAddress();
+
+    document.getElementById("paymentModal").style.display = "block";
+}
 </script>
 
 </body>
